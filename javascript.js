@@ -1,20 +1,30 @@
-console.log("In console");
-function start() {
-  var choices = ["rock", "paper", "scissors"];
-  var choice = Math.floor(Math.random() * choices.length);
-  var compChoice = choices[choice];
-  var computerChoice = document.getElementById("computerChoice");
-  var alertArea = document.getElementById("winner");
-  var rockAnswer = document.getElementById("rock");
-  var paperAnswer = document.getElementById("paper");
-  var scissorsAnswer = document.getElementById("scissors");
+function init(){
+  document.querySelector('#computerChoice').innerHTML = ''
+  document.querySelector('#winner').innerHTML = ''
+}
+init();
 
-  rockAnswer.addEventListener("click", function () {
-    if (compChoice === "paper") {
-      alertArea.textContent = "Winner";
-      computerChoice.textContent = "Paper";
-    }
-  });
+var wins = 0;
+var lose = 0;
+var tie = 0;
+var computerChoices = ["rock", "paper", "scissors"];
+
+function randomCPU() {
+  var index = Math.floor(Math.random() * computerChoices.length);
+  var CPChoice = computerChoices[index];
+
+  return CPChoice;
 }
 
-start();
+function userPick( user ){
+  var computer = randomCPU()
+
+  console.log( `[userPick] user(${user}) computer(${computer})` )
+  
+  var winner = decideWinner( computer, user )
+  console.log( ` winner: ${winner}` )
+  
+  document.querySelector('#computerChoice').innerHTML = computer
+  document.querySelector('#winner').innerHTML = winner
+  console.log( ` game round complete!` )
+}
